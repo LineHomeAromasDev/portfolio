@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Portfolio</title>
+
+
+
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+
+   <style>
+
+
+
+
+       :root {
+           --header-range: cover 0% cover 250px;
+           --header-height: 60px;
+       }
+
+
+
+
+       body {
+           margin: 0;
+           padding: 0;
+           height:100vh;
+           width:100vw;
+           scroll-behavior: smooth;
+           scroll-snap-type: x mandatory;
+           font-family: 'Poppins', sans-serif;
+           overflow-x: hidden;
+           background: rgb(236, 236, 240);
+          
+       }
+
+
+
+
+       .circleGradient {
+           position: absolute;
+           left: 50%;
+           z-index: -1;
+           mask: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+       }
+
+
+
+
+       .circleOne {
+           top: 0;
+           transform: translate(-150px, -100px);
+           width: 600px;
+           height: 650px;
+           background: radial-gradient(circle at center, rgba(0, 132, 255, 1) 0%, rgba(0, 132, 255, 0) 60%);
+       }
+
+
+
+
+       .circleTwo {
+           top: 0;
+           width: 450px;
+           height: 400px;
+           transform: translate(-350px , -150px);
+           background: radial-gradient(circle at center, rgba(255, 0, 191, 1) 0%, rgba(255, 0, 191, 0) 60%);
+       }
+      
+       .banner {
+           display:flex;
+           padding: 0;
+           position: fixed;
+           top:10px;
+           left:50%;
+           transform: translateX(-50%);
+           height: var(--header-height);
+           z-index:5;
+           width:95vw;
+           animation: scale-banner ease-in-out forwards;
+           animation-timeline: scroll();
+           animation-range: var(--header-range);
+
+
+
+
+     background-color: rgba(255, 255, 255,0);
+     backdrop-filter: url(#rect-distort) saturate(0.8)  contrast(1.025) brightness(1.5);
+     -webkit-backdrop-filter: url(#rect-distort);
+     border-radius: 30px;
+     overflow:hidden;
+     box-shadow: 
+     inset 0 0px 5px rgba(0, 0, 0, 0.6), 
+     inset 0 0 15px 0px rgba(0,0,0,0.6), 
+     inset 0 20px 20px -10px rgba(255, 255, 255, 0.5);
+   }
+
+
+
+
+@keyframes scale-banner {
+   0% {
+       opacity:0;
+   }
+   100% {
+       opacity:1;
+   }
+}
+
+
+
+
+
+
+
+
+       .profile {
+           position: fixed;
+           top: 10px;
+           left: 50%;
+           transform: translateX(-50%);
+           display:inline-block;
+           overflow:hidden;
+           height:90px;
+           z-index:10;
+           transform-origin: top left;
+           animation: scale-down ease-in-out forwards;
+           animation-timeline: scroll();
+           animation-range: var(--header-range);
+}
+
+
+
+
+@keyframes scale-down {
+   0% {
+       transform: translateX(-50%);
+   }
+   100% {
+       height:40px;
+       left: 20px;
+       top: 20px;
+       transform: translateX(0%);
+   }
+}
+
+
+
+
+       .profile svg {
+           display:block;
+           width: auto;
+           height: 100%;
+       }
+
+
+
+
+      
+
+
+
+
+      
+       .content {
+           display:flex;
+           flex-direction: column;
+           padding: 0;
+           scroll-snap-align:center;
+           height:auto;
+           display:flex;
+           scroll-behavior: smooth;
+           scroll-snap-type: y mandatory;
+       }
+
+
+
+
+       .welcomeText {
+           padding-top: 130px;
+           padding-bottom: 70px;
+           padding-right:20px;
+           padding-left:20px;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           text-align: center;
+           color: #333;
+           scroll-snap-align: center;
+           font-weight: 300;
+           animation: colorChange linear forwards;
+           animation-timeline: scroll();
+           animation-range: entry 0% exit 100%;
+           overflow:hidden;
+}
+
+
+
+
+@keyframes colorChange {
+   0% {
+      
+   }
+   100% {
+       transform: translateY(100px);
+       filter: blur(30px);
+       opacity:0;
+   }
+}
+
+
+
+
+      
+
+
+
+
+.welcomeForm {
+ display: flex;
+ gap: 10px;
+ margin-top: 1rem;
+ flex-wrap: wrap;
+}
+
+
+
+
+.emailInput {
+ flex: 1;
+ padding: 0.75rem 1rem;
+ border: 2px solid #ccc;
+ border-radius: 8px;
+ font-size: 1rem;
+ outline: none;
+ min-width: 220px;
+ transition: border 0.3s ease, box-shadow 0.3s ease;
+ font-family: inherit;
+}
+
+
+
+
+.emailInput.valid {
+ border-color: #28a745;
+ box-shadow: 0 5px 0px rgba(40, 167, 69, 0.5);
+ pointer-events: auto;
+ user-select: text;
+}
+
+
+
+
+.emailInput.invalid {
+ border-color: #dc3545;
+ box-shadow: 0 5px 0px rgba(220, 53, 69, 0.5);
+}
+
+
+
+
+#welcomeButton {
+ background-color: #000;
+ color: #fff;
+ border: none;
+ padding: 0.75rem 1.5rem;
+ border-radius: 8px;
+ cursor: pointer;
+ font-size: 1rem;
+ transition: background-color 0.3s ease;
+ font-family: inherit;
+}
+
+
+
+
+#bannerSignupButton {
+   background-color: #000;
+   position: absolute;
+   display:none;
+   align-items:center;
+   justify-content:center;
+   top:50%;
+   right:0;
+   transform: translateY(-50%);
+   color: #fff;
+   border: none;
+   padding: 0.75rem 1.5rem;
+   height:100%;
+   cursor: pointer;
+   font-size: 1rem;
+   transition: background-color 0.3s ease;
+   font-family: inherit;
+}
+
+
+
+
+#welcomeButton:hover {
+ background-color: #333;
+}
+
+
+
+
+       .contentSection {
+           display: flex;
+           flex-direction: row;
+           justify-content: left;
+           align-items: center;
+           width: 100vw;
+           height: auto;
+           padding: 0;
+           margin: 0 auto;
+           overflow-x: auto;
+           scroll-snap-type: x mandatory;
+           scroll-snap-points-x: repeat(100%);
+           scroll-snap-align: center;
+           position: relative;
+       }
+
+
+
+
+
+
+
+
+       .contentBox {
+           background-color: #f0f0f0;
+           padding: 0px;
+           max-width:100vw;
+           min-width:100vw;
+           background-repeat: no-repeat;
+           height: 100vh;
+           margin-bottom: 0px;
+           position: relative;
+           overflow:hidden;
+           scroll-snap-align: center;
+           transition: all 0.3s ease-in-out;
+       }
+
+
+
+
+       .contentBox:hover img{
+           filter: brightness(80%);
+       }
+
+
+
+
+       .contentBox img {
+           position:absolute;
+           top:50%;
+           left:50%;
+           transform: scale(1) translate(-50%,-50%);
+           width:auto;
+           min-width:100%;
+           min-height:100%;
+           display:flex;
+           justify-content:center;
+           transition: inherit;
+           align-items:center;
+       }
+
+
+
+
+       .contentBoxText {
+           display:flex;
+           flex-direction:column;
+           color: #e8e8e8;
+           font-weight: 200;
+           width:fit-content;
+           margin: 0;
+           padding:0;
+           position: absolute;
+           bottom:30px;
+           left:30px;
+           z-index:2;
+       }
+
+
+
+
+       .contentBoxText h2 {
+           font-size: 20px;
+           font-weight: 200;
+           padding:0;
+           margin:0;
+       }
+
+
+
+
+       .contentBoxText p {
+           font-size: 12px;
+           font-weight: 200;
+           padding:0;
+           margin:0;
+       }
+
+
+
+
+       .contentBoxBlur {
+           position: absolute;
+           bottom: 0px;
+           left: 0;
+           width: 100%;
+           height: 400px;
+           z-index: 1;
+           background: rgba(0, 0, 0, 0.5);
+           mask: linear-gradient(to top,rgb(255, 255, 255) 15%, transparent 95%);
+           pointer-events: none;
+           backdrop-filter: blur(20px);
+           transition: all 0.3s ease-in-out;
+       }
+
+
+
+
+
+
+
+
+       .scrollContainerWrapper {
+           position: relative;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           overflow: hidden;
+           width: 100%;
+       }
+
+
+
+
+.leftArrow,
+.rightArrow {
+ position: absolute;
+ top: 50%;
+ transform: translateY(-50%);
+ z-index: 10;
+ background: rgba(0, 0, 0, 1);
+ color: white;
+ border: none;
+ border-radius: 50%;
+ padding: 1rem;
+ cursor: pointer;
+ opacity:1;
+ transition: all 0.3s ease;
+}
+
+
+
+
+.leftArrow {
+ left: 1rem;
+}
+
+
+
+
+.rightArrow {
+ right: 1rem;
+}
+
+
+
+
+
+
+
+
+.hidden {
+ opacity: 0;
+ pointer-events: none;
+}
+
+
+
+
+.scrollButton:hover {
+ background: #444;
+}
+
+
+
+
+
+
+
+
+   .banner svg {
+     position: absolute;
+     width: 0;
+     height: 0;
+   }
+   </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+   <div class="profile">
+       <?xml version="1.0" encoding="UTF-8"?>
+       <svg data-name="Layer 2" viewBox="0 0 1856.7 1039.4" xmlns="http://www.w3.org/2000/svg">
+       <g data-name="Layer 1">
+       <rect x="1051.2" y="659.22" width="115.24" height="380.13"/>
+       <rect x="1547.3" y="659.22" width="115.24" height="380.13"/>
+       <rect transform="translate(1005.9 2439.6) rotate(-90)" x="1665.1" y="582.88" width="115.24" height="267.92"/>
+       <rect transform="translate(740.99 2704.4) rotate(-90)" x="1665.1" y="847.77" width="115.24" height="267.92"/>
+       <rect transform="translate(873.43 2572) rotate(-90)" x="1665.1" y="715.32" width="115.24" height="267.92"/>
+       <rect x="682.03" y="659.22" width="115.24" height="380.13"/>
+       <rect x="924.2" y="659.22" width="115.24" height="380.13"/>
+       <polygon points="1039.4 1039.4 924.2 1039.4 682.03 659.22 797.28 659.22"/>
+       <rect x="1178.2" y="659.22" width="115.24" height="380.13"/>
+       <rect x="1420.3" y="659.22" width="115.24" height="380.13"/>
+       <polygon points="1535.6 1039.4 1420.3 1039.4 1178.2 659.22 1293.4 659.22"/>
+       <path d="m704.93 601.46c-15.26-10.57-22.89-25.56-22.89-44.98 0-1.92 0.21-4.8 0.64-8.64h56.99c-0.64 8.11 1.28 14.52 5.76 19.21 4.48 4.7 11.31 7.04 20.49 7.04 8.32 0 14.89-1.81 19.69-5.44s7.2-8.75 7.2-15.37-3.04-12.38-9.12-16.65-15.53-9.07-28.33-14.41c-12.38-5.12-22.47-9.97-30.25-14.57-7.79-4.59-14.57-10.83-20.33-18.73-5.76-7.89-8.64-17.82-8.64-29.77-0.22-14.73 3.41-27.53 10.89-38.42 7.47-10.89 17.82-19.21 31.06-24.97 13.23-5.76 28.38-8.64 45.46-8.64 15.37 0 29.02 2.4 40.98 7.2 11.95 4.8 21.24 11.74 27.85 20.81s9.92 19.8 9.92 32.18c0 3.2-0.11 5.55-0.32 7.04h-58.27c0.21-0.85 0.32-2.13 0.32-3.84 0-5.97-2.08-10.83-6.24-14.57-4.16-3.73-9.87-5.6-17.13-5.6-7.68 0-13.93 1.87-18.73 5.6-4.8 3.74-7.2 8.8-7.2 15.21s2.99 11.8 8.96 16.17c5.97 4.38 15.26 9.44 27.85 15.21 12.59 5.76 22.89 11.1 30.9 16.01 8 4.91 14.89 11.48 20.65 19.69 5.76 8.22 8.64 18.3 8.64 30.25 0 13.24-3.52 25.08-10.57 35.54-7.04 10.46-17.18 18.62-30.41 24.49-13.24 5.87-28.71 8.8-46.42 8.8-24.33 0-44.13-5.28-59.39-15.85z"/>
+       <path d="m1075.5 390.32-7.36 43.22h-59.87l-32.02 181.53h-54.75l32.02-181.53h-59.55l7.68-43.22h173.85z"/>
+       <path d="m1156.8 390.32-23.69 134.15c-0.86 5.55-1.28 9.39-1.28 11.53 0 9.82 2.77 17.34 8.32 22.57s13.77 7.84 24.65 7.84c12.81 0 23.26-3.63 31.38-10.89 8.11-7.25 13.34-17.61 15.69-31.06l23.69-134.15h54.75l-23.69 134.15c-3.63 20.28-10.84 37.41-21.61 51.39-10.78 13.98-23.91 24.39-39.38 31.22-15.48 6.83-32.29 10.24-50.42 10.24-23.48 0-42.42-6.08-56.83-18.25s-21.61-29.77-21.61-52.83c0-6.83 0.64-14.09 1.92-21.77l23.37-134.15h54.75z"/>
+       <path d="m1466.6 401.36c15.05 7.36 26.57 17.72 34.58 31.06 8 13.34 12.01 28.97 12.01 46.9 0 6.19-0.75 13.98-2.24 23.37-3.84 21.99-12.12 41.52-24.81 58.59-12.7 17.08-28.81 30.31-48.34 39.7s-41.04 14.09-64.51 14.09h-84.2l39.7-224.75h84.2c20.7 0 38.58 3.68 53.63 11.05zm-36.98 149.68c13.66-11.53 22.2-27.64 25.61-48.34 1.07-6.4 1.6-11.74 1.6-16.01 0-15.79-4.8-28.01-14.41-36.66-9.6-8.64-23.27-12.97-40.98-12.97h-26.25l-23.05 131.26h25.93c20.7 0 37.88-5.76 51.55-17.29z"/>
+       <path d="m1616.2 390.32-39.7 224.75h-54.75l39.7-224.75h54.75z"/>
+       <path d="m1673.1 605.46c-14.41-7.89-25.56-18.99-33.46-33.3-7.9-14.3-11.85-30.74-11.85-49.3 0-26.25 5.65-49.67 16.97-70.27 11.31-20.6 27.05-36.66 47.22-48.18 20.17-11.53 43.06-17.29 68.67-17.29 19.21 0 36.07 3.9 50.58 11.69s25.72 18.78 33.62 32.98c7.89 14.2 11.85 30.47 11.85 48.82 0 26.25-5.66 49.78-16.97 70.59-11.32 20.81-27.11 37.03-47.38 48.66-20.28 11.64-43.33 17.45-69.15 17.45-19 0-35.7-3.95-50.1-11.85zm95.57-49.62c10.67-7.25 18.94-17.02 24.81-29.29s8.8-25.56 8.8-39.86c0-15.37-4.27-27.42-12.81-36.18-8.54-8.75-20.49-13.13-35.86-13.13-14.09 0-26.52 3.63-37.3 10.89s-19.1 16.92-24.97 28.97c-5.87 12.06-8.8 25.35-8.8 39.86 0 15.37 4.27 27.48 12.81 36.34 8.53 8.86 20.6 13.29 36.18 13.29 14.09 0 26.46-3.63 37.14-10.89z"/>
+       <path d="M608.39,690.72l-64.1,85.08,64.1-189.66v-93.7l-108.09,319.83L303.5,230h393.59l-27.13,80.27h31.67l27.13-80.27h226.75l-60.48,80.27h37.56l64.98-86.25c.08-.11.14-.22.22-.32.14-.19.27-.38.4-.58.13-.2.25-.4.37-.6.12-.2.23-.4.34-.61.11-.21.21-.43.31-.65.1-.21.19-.41.28-.63.09-.23.18-.47.26-.7.07-.21.15-.41.21-.62.08-.27.15-.55.21-.83.04-.18.09-.35.13-.53.09-.46.16-.92.21-1.39,0-.08,0-.17.02-.25.03-.4.06-.79.06-1.19,0-.04,0-.08,0-.12,0-.13-.02-.25-.02-.38,0-.31-.02-.62-.05-.93-.02-.2-.04-.41-.07-.61-.03-.26-.07-.52-.12-.77-.04-.22-.08-.44-.13-.66-.05-.23-.11-.47-.18-.7-.06-.22-.12-.44-.2-.66-.08-.23-.16-.45-.25-.68-.08-.21-.16-.42-.25-.62-.1-.24-.22-.47-.34-.7-.09-.18-.18-.36-.27-.54-.14-.26-.3-.51-.46-.76-.09-.14-.17-.29-.27-.43-.19-.28-.4-.55-.62-.83-.08-.1-.15-.2-.23-.3-.28-.34-.58-.66-.89-.98-.02-.02-.04-.05-.06-.07L796.19,4.39c-.08-.08-.17-.15-.25-.23-.22-.21-.45-.42-.68-.62-.14-.12-.29-.24-.44-.35-.24-.18-.47-.36-.72-.54-.17-.11-.34-.22-.51-.33-.24-.15-.48-.3-.73-.43-.2-.11-.4-.21-.61-.32-.23-.11-.46-.23-.69-.33-.24-.1-.49-.2-.73-.29-.15-.06-.29-.12-.44-.18-.07-.02-.15-.04-.22-.06-.25-.08-.51-.15-.76-.22-.23-.06-.47-.13-.7-.18-.22-.05-.45-.08-.68-.12-.27-.05-.54-.09-.82-.12-.19-.02-.38-.03-.57-.04-.31-.02-.62-.04-.92-.05-.04,0-.09,0-.13,0H215s-.08,0-.13,0c-.31,0-.62.02-.94.05-.19.01-.37.02-.56.04-.28.03-.55.08-.83.12-.22.04-.45.07-.67.12-.24.05-.47.12-.71.18-.26.07-.51.13-.76.21-.07.02-.15.04-.22.06-.15.05-.29.12-.44.17-.25.09-.49.18-.73.29-.24.1-.46.21-.69.33-.21.1-.41.2-.61.32-.25.14-.49.28-.73.43-.17.11-.34.22-.51.33-.25.17-.49.35-.72.53-.15.12-.29.23-.44.35-.23.2-.46.4-.68.62-.08.08-.17.15-.25.23L4.4,204.39s-.04.05-.07.07c-.31.32-.61.64-.89.98-.08.1-.15.21-.23.31-.21.27-.42.54-.61.82-.1.14-.18.29-.27.44-.16.25-.32.5-.46.75-.1.18-.18.36-.28.55-.12.23-.23.46-.33.69-.09.21-.17.42-.25.63-.09.22-.17.45-.25.67-.07.22-.14.44-.2.67-.06.23-.13.46-.18.69-.05.22-.09.44-.13.66-.05.26-.08.51-.12.77-.03.2-.05.4-.07.61-.03.31-.04.62-.05.93,0,.13-.02.25-.02.38,0,.04,0,.08,0,.12,0,.4.03.8.06,1.2,0,.08,0,.16.01.24.05.47.12.93.21,1.39.04.18.09.35.13.52.07.28.13.56.22.84.06.21.14.41.21.61.08.24.16.48.26.71.09.21.18.42.28.62.1.22.2.44.31.65.11.21.22.41.34.61.12.2.24.41.37.61.13.2.26.39.4.58.08.11.14.22.22.32l485.24,644.04s.07.1.11.14c0,0,0,0,0,0,.21.28.43.54.66.8,0,0,0,.01.01.02.06.06.12.12.17.18.07.07.14.15.21.22.06.06.12.12.18.18.14.14.27.28.41.41.06.05.12.11.18.16.11.1.21.19.32.28.08.07.16.14.24.21.06.05.13.1.19.15.05.04.1.08.15.12.06.04.11.09.17.14.03.02.06.04.08.06.08.06.15.11.23.17.13.09.27.18.41.27.1.07.19.14.29.2.06.04.12.07.19.11.06.04.12.08.18.12.11.07.23.13.34.19.18.1.36.2.54.29.04.02.07.04.11.06.09.04.17.08.26.12.1.05.2.09.3.14.14.06.28.13.42.18.09.04.18.07.27.1.08.03.15.06.23.09.09.03.18.07.27.1.11.04.22.08.33.12.06.02.12.03.18.05.31.09.62.19.93.26.03,0,.05.01.08.02.03,0,.06.01.08.02.06.01.11.02.17.03.21.04.42.09.63.13.03,0,.07.02.1.02.02,0,.03,0,.05,0,.17.03.33.04.5.06.09.01.19.02.28.03.05,0,.1.01.15.02.07,0,.15.02.22.03.39.03.79.05,1.18.05h0c.4,0,.79-.02,1.19-.05.06,0,.12-.02.18-.02.06,0,.13-.02.19-.02.09,0,.19-.02.28-.03.17-.02.34-.03.5-.06.02,0,.04,0,.05,0,.02,0,.05-.01.07-.01.2-.03.39-.08.59-.12.08-.02.17-.03.25-.05.03,0,.06-.01.09-.02.03,0,.06-.01.08-.02.29-.07.58-.16.87-.24.08-.02.16-.04.24-.07.07-.02.14-.05.22-.07,0,0,0,0,0,0,0,0,.01,0,.02,0,.03-.01.06-.02.09-.03.1-.03.19-.07.28-.11.06-.02.12-.05.18-.07.1-.04.21-.07.31-.12.14-.06.27-.12.41-.18.1-.05.2-.09.31-.14.09-.04.18-.08.26-.12.04-.02.07-.04.11-.06.18-.09.35-.19.53-.29.12-.07.24-.13.35-.19.06-.04.12-.08.19-.12.06-.04.12-.07.18-.11.1-.06.2-.14.3-.2.13-.09.27-.17.4-.27.08-.05.15-.11.23-.17.03-.02.06-.04.08-.06.06-.04.11-.09.17-.14.05-.04.1-.07.15-.11.07-.05.14-.1.2-.15.08-.07.16-.14.24-.21.11-.09.22-.19.32-.29.06-.05.12-.11.18-.16.14-.13.28-.27.41-.41.06-.06.12-.12.18-.19.07-.07.14-.15.21-.22.06-.06.12-.12.17-.18,0,0,.01-.01.02-.02.23-.26.44-.52.65-.8,0,0,0,0,0,0,.04-.05.07-.09.11-.14l96.06-127.5v-49.86ZM792.06,42.69l157.31,157.31h-210.48l53.17-157.31ZM764.68,30l-53.52,158.36L538.79,30h225.89ZM679.49,200h-358.4L500.29,35.37l179.2,164.63ZM461.8,30l-172.37,158.36L235.9,30h225.89ZM208.52,42.69l53.17,157.31H51.21L208.52,42.69ZM45.08,230h226.75l184.47,545.8L45.08,230Z"/>
+       </g>
+       </svg>
+   </div>
+  
+   <div class="banner backdrop-box">
+
+
+
+
+       <svg xmlns="http://www.w3.org/2000/svg">
+           <filter id="rect-distort" filterUnits="objectBoundingBox" x="0" y="0" width="1" height="1">
+             <!-- Gradient-based distortion map -->
+             <feImage result="gradient" preserveAspectRatio="none"
+               xlink:href="data:image/svg+xml;utf8,
+                 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+                   <defs>
+                     <linearGradient id='xgrad' x1='0%' y1='0%' x2='100%' y2='0%'>
+                       <stop offset='0%' stop-color='rgb(0,0,128)'/>
+                       <stop offset='20%' stop-color='rgb(128,0,128)'/>
+                       <stop offset='100%' stop-color='rgb(255,0,128)'/>
+                     </linearGradient>
+                     <linearGradient id='ygrad' x1='0%' y1='0%' x2='0%' y2='100%'>
+                       <stop offset='0%' stop-color='rgb(128,0,0)'/>
+                       <stop offset='20%' stop-color='rgb(128,128,0)'/>
+                       <stop offset='100%' stop-color='rgb(128,255,0)'/>
+                     </linearGradient>
+                   </defs>
+                   <rect width='100' height='100' fill='url(%23xgrad)'/>
+                   <rect width='100' height='100' fill='url(%23ygrad)' style='mix-blend-mode:lighten'/>
+                 </svg>" />
+        
+               <!-- Generate a turbulence pattern as displacement map -->
+               <feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turb" />
+              
+               <!-- Slightly blur the turbulence for smoother displacement -->
+               <feGaussianBlur in="turb" stdDeviation="8" result="blurredGradient" />
+              
+               <!-- Apply displacement to the source graphic -->
+               <feDisplacementMap in="SourceGraphic" in2="blurredGradient"
+                                  scale="60"
+                                  xChannelSelector="R"
+                                  yChannelSelector="G" />
+      
+             </filter>
+      
+         </svg>
+
+
+
+
+       <button type="submit" id="bannerSignupButton">Subscribe</button>
+
+
+
+
+   </div>
+   <div class="content">
+
+
+
+
+      
+
+
+
+
+       <div class="welcomeText">
+           <p>Explore my work, from stunning landscapes to vibrant fruit photography. Each piece tells a story of creativity and passion.</p>
+        
+           <form class="welcomeForm" id="emailForm">
+             <input
+               type="email"
+               name="email"
+               placeholder="Enter your email"
+               required
+               class="emailInput"
+               id="emailInput"
+             />
+             <button type="submit" id="welcomeButton">Subscribe</button>
+           </form>
+
+
+
+
+           <div class="circleGradient circleOne"></div>
+
+
+
+
+           <div class="circleGradient circleTwo"></div>
+
+
+
+
+         </div>
+
+
+
+
+
+
+
+
+<div class="scrollContainerWrapper">
+
+
+
+
+   <div class="contentSection" id="carousel">
+
+
+
+
+      
+       <div class="contentBox">
+           <img src="https://i.postimg.cc/5NgWSgyY/Asset-1-2x.png" alt="Lemon Background">
+
+
+
+
+           <div class="contentBoxBlur">
+           </div>
+
+
+
+
+           <div class="contentBoxText">
+               <h2>Natures Finest</h2>
+               <p>A collection of my greatest moments in the great outdoors, capturing natural beauty along my journey.</p>
+           </div>
+       </div>
+
+
+
+
+       <div class="contentBox">
+           <img src="https://i.postimg.cc/vHBxHPjQ/Lemon-Background-3x.png" alt="Lemon Background">
+
+
+
+
+           <div class="contentBoxBlur">
+           </div>
+
+
+
+
+           <div class="contentBoxText">
+               <h2>Seamlessly Fruity</h2>
+               <p>Crafted fruity visuals for brand visuals, marketing, personal projects and more.</p>
+           </div>
+       </div>
+
+
+
+
+       <div class="contentBox">
+           <img src="https://i.postimg.cc/vm0dRgBm/Icecream-2x.png" alt="Lemon Background">
+
+
+
+
+           <div class="contentBoxBlur">
+           </div>
+
+
+
+
+           <div class="contentBoxText">
+               <h2>The Summer of 25</h2>
+               <p>Professionally crafted visuals for brand visuals, marketing, personal projects and more.</p>
+           </div>
+       </div>
+      
+   </div>
+
+
+
+
+   <button id="leftBtn" class="leftArrow hidden">&#8592;</button>
+   <button id="rightBtn" class="rightArrow hidden">&#8594;</button>
+ </div>
+
+
+
+
+
+
+
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <script>
+ const emailInput = document.getElementById('emailInput');
+ const signupButton = document.getElementById('welcomeButton');
+
+
+
+
+ emailInput.addEventListener('input', () => {
+   const value = emailInput.value.trim();
+   const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+
+
+
+   emailInput.classList.remove('valid', 'invalid');
+
+
+
+
+   if (value.length > 0) {
+     emailInput.classList.add(isValid ? 'valid' : 'invalid');
+     signupButton.classList.add(isValid ? 'valid' : 'invalid');
+   }
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+  const carousel = document.getElementById("carousel");
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+
+
+
+
+const cardWidth = carousel.querySelector(".contentBox").offsetWidth;
+
+
+
+
+const updateButtons = () => {
+ const scrollLeft = carousel.scrollLeft;
+ const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+
+
+
+
+ leftBtn.classList.toggle("hidden", scrollLeft <= 0);
+ rightBtn.classList.toggle("hidden", scrollLeft >= maxScrollLeft - 1);
+};
+
+
+
+
+const scrollToCard = (direction) => {
+ carousel.scrollBy({
+   left: direction * cardWidth,
+   behavior: "smooth"
+ });
+};
+
+
+
+
+carousel.addEventListener("scroll", updateButtons);
+leftBtn.addEventListener("click", () => scrollToCard(-1));
+rightBtn.addEventListener("click", () => scrollToCard(1));
+
+
+
+
+window.addEventListener("load", updateButtons);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
