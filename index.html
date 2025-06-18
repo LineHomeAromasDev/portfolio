@@ -25,13 +25,35 @@
            --header-height: 60px;
        }
 
+       /* Entire scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+    background: rgb(236, 236, 240);
+}
+
+/* Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 0;
+}
+
+/* On hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 
 
 
        body {
            margin: 0;
            padding: 0;
-           height:100vh;
+           height:400vh;
            width:100vw;
            scroll-behavior: smooth;
            scroll-snap-type: x mandatory;
@@ -44,34 +66,6 @@
 
 
 
-       .circleGradient {
-           position: absolute;
-           left: 50%;
-           z-index: -1;
-           mask: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
-       }
-
-
-
-
-       .circleOne {
-           top: 0;
-           transform: translate(-150px, -100px);
-           width: 600px;
-           height: 650px;
-           background: radial-gradient(circle at center, rgba(0, 132, 255, 1) 0%, rgba(0, 132, 255, 0) 60%);
-       }
-
-
-
-
-       .circleTwo {
-           top: 0;
-           width: 450px;
-           height: 400px;
-           transform: translate(-350px , -150px);
-           background: radial-gradient(circle at center, rgba(255, 0, 191, 1) 0%, rgba(255, 0, 191, 0) 60%);
-       }
       
        .banner {
            display:flex;
@@ -79,10 +73,9 @@
            position: fixed;
            top:10px;
            left:50%;
-           transform: translateX(-50%);
            height: var(--header-height);
-           z-index:5;
-           width:95vw;
+           z-index:10;
+           width: calc(100vw - 50px);
            animation: scale-banner ease-in-out forwards;
            animation-timeline: scroll();
            animation-range: var(--header-range);
@@ -91,14 +84,14 @@
 
 
      background-color: rgba(255, 255, 255,0);
-     backdrop-filter: url(#rect-distort) saturate(0.8)  contrast(1.025) brightness(1.5);
-     -webkit-backdrop-filter: url(#rect-distort);
-     border-radius: 30px;
+     backdrop-filter: url(#combined-lens) saturate(1) brightness(1.1) contrast(1.1);
+     -webkit-backdrop-filter: url(#combined-lens) saturate(1) brightness(1.1) contrast(1.1);
+     border-radius: 20px;
      overflow:hidden;
      box-shadow: 
-     inset 0 0px 5px rgba(0, 0, 0, 0.6), 
-     inset 0 0 15px 0px rgba(0,0,0,0.6), 
-     inset 0 20px 20px -10px rgba(255, 255, 255, 0.5);
+        inset 0 -5px 10px rgba(0, 0, 0, 0.3), 
+        inset 0 7px 7px 7px rgba(255, 255, 255, 0.4), 
+        inset 0 -15px 15px 10px rgba(92, 104, 133, 0.1);
    }
 
 
@@ -106,10 +99,14 @@
 
 @keyframes scale-banner {
    0% {
-       opacity:0;
+       transform: translate(-100%, 0);
+       width:0;
+       border-radius:100px;
    }
    100% {
-       opacity:1;
+       transform: translate(-50%, 0);
+       width: calc(100vw - 50px);
+       border-radius: 25px;
    }
 }
 
@@ -128,7 +125,7 @@
            display:inline-block;
            overflow:hidden;
            height:90px;
-           z-index:10;
+           z-index:20;
            transform-origin: top left;
            animation: scale-down ease-in-out forwards;
            animation-timeline: scroll();
@@ -144,7 +141,7 @@
    }
    100% {
        height:40px;
-       left: 20px;
+       left: 30px;
        top: 20px;
        transform: translateX(0%);
    }
@@ -317,13 +314,14 @@
            align-items: center;
            width: 100vw;
            height: auto;
-           padding: 0;
+           padding: 0 50px;
            margin: 0 auto;
            overflow-x: auto;
            scroll-snap-type: x mandatory;
            scroll-snap-points-x: repeat(100%);
            scroll-snap-align: center;
            position: relative;
+           gap:40px;
        }
 
 
@@ -334,24 +332,27 @@
 
 
        .contentBox {
-           background-color: #f0f0f0;
            padding: 0px;
-           max-width:100vw;
-           min-width:100vw;
+           max-width:60vw;
+           min-width:60vw;
            background-repeat: no-repeat;
-           height: 100vh;
-           margin-bottom: 0px;
+           height: 80vh;
+           margin: 10px 0;
            position: relative;
            overflow:hidden;
            scroll-snap-align: center;
-           transition: all 0.3s ease-in-out;
+           transition: all 1s ease-in-out;
        }
 
 
 
 
        .contentBox:hover img{
-           filter: brightness(80%);
+           transform: scale(1.05) translate(-50%, -50%);
+       }
+
+       .contentBox:hover{
+
        }
 
 
@@ -361,14 +362,14 @@
            position:absolute;
            top:50%;
            left:50%;
-           transform: scale(1) translate(-50%,-50%);
+           transform: scale(1) translate(-50%, -50%);
            width:auto;
-           min-width:100%;
            min-height:100%;
            display:flex;
            justify-content:center;
            transition: inherit;
            align-items:center;
+           transform-origin: top left;
        }
 
 
@@ -377,23 +378,25 @@
        .contentBoxText {
            display:flex;
            flex-direction:column;
-           color: #e8e8e8;
+           color: #000000;
            font-weight: 200;
            width:fit-content;
            margin: 0;
-           padding:0;
+           padding:20px;
+           box-sizing: border-box;
            position: absolute;
-           bottom:30px;
-           left:30px;
+           bottom:0;
+           left:0;
            z-index:2;
+           width:100%;
        }
 
 
 
 
        .contentBoxText h2 {
-           font-size: 20px;
-           font-weight: 200;
+           font-size: 1.5rem;
+           font-weight: 300;
            padding:0;
            margin:0;
        }
@@ -402,7 +405,7 @@
 
 
        .contentBoxText p {
-           font-size: 12px;
+           font-size: 1rem;
            font-weight: 200;
            padding:0;
            margin:0;
@@ -418,11 +421,11 @@
            width: 100%;
            height: 400px;
            z-index: 1;
-           background: rgba(0, 0, 0, 0.5);
+           background: rgba(0, 0, 0, 0.2);
            mask: linear-gradient(to top,rgb(255, 255, 255) 15%, transparent 95%);
            pointer-events: none;
-           backdrop-filter: blur(20px);
-           transition: all 0.3s ease-in-out;
+           backdrop-filter: blur(20px) saturate(1.2) brightness(1.1);
+           transition: all 0.3s ease-in-out ;
        }
 
 
@@ -446,56 +449,62 @@
 
 .leftArrow,
 .rightArrow {
- position: absolute;
- top: 50%;
- transform: translateY(-50%);
- z-index: 10;
- background: rgba(0, 0, 0, 1);
- color: white;
- border: none;
- border-radius: 50%;
- padding: 1rem;
- cursor: pointer;
- opacity:1;
- transition: all 0.3s ease;
+    position: absolute;
+    height:60px;
+    aspect-ratio:1/1;
+    width:auto;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background-color: rgba(255, 255, 255,0);
+    backdrop-filter: url(#combined-lens) saturate(1) brightness(1.1) contrast(1.1);
+    -webkit-backdrop-filter: url(#combined-lens) saturate(1) brightness(1.1) contrast(1.1);
+    box-shadow: 
+        inset 0 -5px 10px rgba(0, 0, 0, 0.3), 
+        inset 0 7px 7px 7px rgba(255, 255, 255, 0.4), 
+        inset 0 -15px 15px 10px rgba(92, 104, 133, 0.1);
+    color: black;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    opacity:1;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.leftArrow svg {
+ width: auto;
+ height: 40%;
+ fill: rgba(0, 0, 0, 0.5);
+ padding:0;
+ margin:0;
+ transform: rotate(180deg);
+}
 
-
+.rightArrow svg {
+ width: 30px;
+ height: 30px;
+ fill: #000;
+ padding:0;
+ margin:0;
+}
 
 .leftArrow {
  left: 1rem;
 }
 
-
-
-
 .rightArrow {
  right: 1rem;
 }
 
-
-
-
-
-
-
-
 .hidden {
+ height:0;
  opacity: 0;
  pointer-events: none;
 }
-
-
-
-
-.scrollButton:hover {
- background: #444;
-}
-
-
-
-
 
 
 
@@ -547,43 +556,68 @@
 
 
 
-       <svg xmlns="http://www.w3.org/2000/svg">
-           <filter id="rect-distort" filterUnits="objectBoundingBox" x="0" y="0" width="1" height="1">
-             <!-- Gradient-based distortion map -->
-             <feImage result="gradient" preserveAspectRatio="none"
-               xlink:href="data:image/svg+xml;utf8,
-                 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-                   <defs>
-                     <linearGradient id='xgrad' x1='0%' y1='0%' x2='100%' y2='0%'>
-                       <stop offset='0%' stop-color='rgb(0,0,128)'/>
-                       <stop offset='20%' stop-color='rgb(128,0,128)'/>
-                       <stop offset='100%' stop-color='rgb(255,0,128)'/>
-                     </linearGradient>
-                     <linearGradient id='ygrad' x1='0%' y1='0%' x2='0%' y2='100%'>
-                       <stop offset='0%' stop-color='rgb(128,0,0)'/>
-                       <stop offset='20%' stop-color='rgb(128,128,0)'/>
-                       <stop offset='100%' stop-color='rgb(128,255,0)'/>
-                     </linearGradient>
-                   </defs>
-                   <rect width='100' height='100' fill='url(%23xgrad)'/>
-                   <rect width='100' height='100' fill='url(%23ygrad)' style='mix-blend-mode:lighten'/>
-                 </svg>" />
-        
-               <!-- Generate a turbulence pattern as displacement map -->
-               <feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" result="turb" />
-              
-               <!-- Slightly blur the turbulence for smoother displacement -->
-               <feGaussianBlur in="turb" stdDeviation="8" result="blurredGradient" />
-              
-               <!-- Apply displacement to the source graphic -->
-               <feDisplacementMap in="SourceGraphic" in2="blurredGradient"
-                                  scale="60"
-                                  xChannelSelector="R"
-                                  yChannelSelector="G" />
-      
-             </filter>
-      
-         </svg>
+<svg id="svgFilter" xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0;">
+  <filter id="combined-lens" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+    
+    <!-- 1. Turbulence for displacement texture -->
+    <feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="2" seed="5" result="turbulence"/>
+
+    <!-- 2. Radial map for lens shape -->
+    <feImage result="radialMap" preserveAspectRatio="none"
+      xlink:href="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+        <radialGradient id='g' cx='50%' cy='50%' r='50%'>
+          <stop offset='0%' stop-color='rgb(128,128,255)'/>
+          <stop offset='70%' stop-color='rgb(128,208,200)'/>
+          <stop offset='90%' stop-color='rgb(100,100,150)'/>
+          <stop offset='100%' stop-color='rgb(90,90,90)'/>
+        </radialGradient>
+        <rect width='100%' height='100%' fill='url(%23g)'/>
+      </svg>" />
+
+    <!-- 3. Blend the radial and turbulence maps -->
+    <feBlend in="turbulence" in2="radialMap" mode="lighten" result="combinedMap" />
+
+    <!-- 4. Blur for smoother distortion -->
+    <feGaussianBlur in="combinedMap" stdDeviation="5" result="blurredMap" />
+
+    <!-- 5. Chromatic aberration channel splits -->
+    <feColorMatrix in="blurredMap" type="matrix" result="r"
+      values="1 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0"/>
+    <feColorMatrix in="blurredMap" type="matrix" result="g"
+      values="0 0 0 0 0
+              0 1 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0"/>
+    <feColorMatrix in="blurredMap" type="matrix" result="b"
+      values="0 0 0 0 0
+              0 0 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0"/>
+
+    <!-- 6. Subtle RGB channel shifts -->
+    <feOffset in="r" dx="0.7" dy="-0.7" result="rShift"/>
+    <feOffset in="g" dx="-0.7" dy="0.7" result="gShift"/>
+    <feOffset in="b" dx="0.5" dy="0.5" result="bShift"/>
+
+    <!-- 7. Merge RGB shifts -->
+    <feBlend in="rShift" in2="gShift" mode="screen" result="rg"/>
+    <feBlend in="rg" in2="bShift" mode="screen" result="iridescence"/>
+
+    <!-- 8. Very subtle displacement to avoid major warping -->
+    <feDisplacementMap in="SourceGraphic" in2="iridescence"
+      scale="15" xChannelSelector="R" yChannelSelector="G" result="distorted"/>
+
+    <!-- 9. Light blur to soften -->
+    <feGaussianBlur in="distorted" stdDeviation="0.6" result="softOutput"/>
+
+    <!-- 10. Mask outside edges softly -->
+    <feComposite in="softOutput" in2="SourceAlpha" operator="in"/>
+  </filter>
+</svg>
 
 
 
@@ -594,13 +628,10 @@
 
 
    </div>
+
+
+
    <div class="content">
-
-
-
-
-      
-
 
 
 
@@ -620,14 +651,6 @@
            </form>
 
 
-
-
-           <div class="circleGradient circleOne"></div>
-
-
-
-
-           <div class="circleGradient circleTwo"></div>
 
 
 
@@ -717,12 +740,56 @@
 
 
 
-   <button id="leftBtn" class="leftArrow hidden">&#8592;</button>
-   <button id="rightBtn" class="rightArrow hidden">&#8594;</button>
- </div>
+   <button id="leftBtn" class="leftArrow hidden">
+    <?xml version="1.0" encoding="UTF-8"?>
+<svg id="arrow1" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1182.13 1024.12">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: bevel;
+        stroke-width: 220px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <line class="cls-1" x1="110" y1="512.06" x2="1072.13" y2="512.06"/>
+      <line class="cls-1" x1="670.07" y1="110" x2="1072.13" y2="512.06"/>
+      <line class="cls-1" x1="670.07" y1="914.12" x2="1072.13" y2="512.06"/>
+    </g>
+  </g>
+</svg>
+   </button>
 
+   <button id="rightBtn" class="rightArrow hidden">
+    <?xml version="1.0" encoding="UTF-8"?>
+<svg id="arrow2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1182.13 1024.12">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: bevel;
+        stroke-width: 220px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <line class="cls-1" x1="110" y1="512.06" x2="1072.13" y2="512.06"/>
+      <line class="cls-1" x1="670.07" y1="110" x2="1072.13" y2="512.06"/>
+      <line class="cls-1" x1="670.07" y1="914.12" x2="1072.13" y2="512.06"/>
+    </g>
+  </g>
+</svg>
+   </button>
+</div>
 
+<div class="contentSection" >
 
+</div>
 
 
 
@@ -828,6 +895,9 @@ window.addEventListener("load", updateButtons);
 </script>
 </body>
 </html>
+
+
+
 
 
 
